@@ -120,23 +120,16 @@ Signal::Signal(string filename) //parametric constructor
 	
 	try
 	{
-		try
+		if(!myfile.is_open())
 		{
-			if(!myfile.is_open())
-			{
-				throw 1;                                          //used to throw integer if file is not open
-			}
-		}
-		catch(int j)
-		{
-			cout << "ERROR! File could not be opened." << endl;  //used to check if file was opened
-			cout << "RE-THROW 2 is being used!" << endl;
-			throw;                                               //used to rethrow
+			throw 1;                                          //used to throw integer if file is not open
 		}
 	}
-	catch(int q)
+	catch(int j)
 	{
-		throw 1; 
+		cout << "ERROR! File could not be opened." << endl;  //used to check if file was opened
+		cout << "RE-THROW 2 is being used!" << endl;
+		throw;                                               //used to rethrow
 	}
 	
 	
@@ -635,11 +628,15 @@ int main(int argc, char* argv[])
 				}
 				catch(char r)
 				{
-					cout << "/nERROR!! Operation cannot be performed on an empty signal." << endl;
+					cout << "\nERROR!! Operation cannot be performed on an empty signal." << endl;
 				}
 				catch(myClass &Cat)
 				{
 					Cat.message();                         //used to call class method that prints error message
+				}
+				catch(...)
+				{
+					cout << "\nFile did not exist. Please proceed with a different option." << endl;
 				}
 				break;
 			
